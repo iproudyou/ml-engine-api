@@ -4,6 +4,17 @@ services:
   ml-engine-api:
     build:
         context: ./
+    depends_on:
+      - postgres
     ports:
       - 5000:5000
-    
+  
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: kpop
+    ports:
+      - 5432:5432
