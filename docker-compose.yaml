@@ -2,19 +2,23 @@ version: "3.7"
 
 services:
   ml-engine-api:
+    container_name: ml-engine-api
     build:
         context: ./
     depends_on:
-      - postgres
+      - database
     ports:
       - 5000:5000
-  
-  postgres:
-    image: postgres
+      
+  database:
+    container_name: postgres
+    image: postgres:latest
+    env_file: .env
     restart: always
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: kpop
     ports:
       - 5432:5432
+    volumes:
+      - db_volume:/var/lib/postgresql
+
+volumes: 
+  db_volume:
