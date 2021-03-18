@@ -8,7 +8,6 @@ services:
       - postgres
     ports:
       - 5000:5000
-  
   postgres:
     image: postgres
     restart: always
@@ -18,3 +17,4 @@ services:
       POSTGRES_DB: kpop
     ports:
       - 5432:5432
+      

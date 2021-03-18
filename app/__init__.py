@@ -1,5 +1,8 @@
+# Common python package imports
 from flask import Flask
-app = Flask(__name__)
+
+# Initialize the app
+APP = Flask(__name__)
 
 @app.route('/')
 def hello_world():
