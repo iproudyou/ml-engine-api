@@ -1,3 +1,10 @@
-Flask==1.1.2
+numpy==1.20.1
+pandas==1.2.3
+matplotlib==3.3.4
+scikit-learn==0.24.1
 scrapy==2.4.1
 google==3.0.0
+Flask==1.1.2
+Flask-SQLAlchemy==2.4.4
+psycopg2-binary==2.8.6
+Flask-Migrate==2.7.0

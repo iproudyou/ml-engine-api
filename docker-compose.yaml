@@ -1,20 +1,27 @@
 version: "3.7"
 
 services:
-  ml-engine-api:
-    build:
-        context: ./
+  ml-api:
+    build: .
     depends_on:
-      - postgres
+      - ml-db
+    env_file: .env
+    restart: always
+    networks:
+      - default
     ports:
       - 5000:5000
-  postgres:
-    image: postgres
+    volumes:
+      - ./app:/usr/src/app/app
+      - ./migrations:/usr/src/app/migrations
+      
+  ml-db:
+    image: postgres:latest
+    env_file: .env
     restart: always
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: kpop
+    networks: 
+      - default
     ports:
       - 5432:5432
-      
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
