@@ -50,6 +50,6 @@ def edit(cat_id):
     return json.dumps("Edited"), 200
 
 if __name__ == "__main__":
-    app.run(deburg=True)
+    app.run(debug=True)
 
 
