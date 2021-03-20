@@ -1,4 +1,4 @@
-from .models import db
+from app.models import db
 
 def get_all(model):
     data = model.query.all()
@@ -7,14 +7,17 @@ def get_all(model):
 def add_instance(model, **kwargs):
     instance = model(**kwargs)
     db.session.add(instance)
-    db.session.commit()
+    commit_changes()
 
 def delete_instance(model, id):
     model.query.filter.by(id=id).delete()
-    db.session.commit()
+    commit_changes()
 
 def edit_instance(model, id, **kwargs):
     instnace = model.query.filter_by(id=id).all()[0]
     for attr, new_value in kwargs:
         setattr(instance, attr, new_value)
+    commit_changes()
+
+def commit_changes():
     db.session.commit()
