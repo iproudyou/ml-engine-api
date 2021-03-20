@@ -20,4 +20,5 @@ RUN python -c "import pandas"
 COPY . /app
 WORKDIR /app
 
+RUN chmod +x ./gunicorn.sh
 ENTRYPOINT [ "./gunicorn.sh" ]
