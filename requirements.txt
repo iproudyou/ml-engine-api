@@ -10,4 +10,4 @@ psycopg2-binary==2.8.6
 Flask-Migrate==2.7.0
 torch==1.7.1
 torchvision==0.8.2
-torchaudio=0.7.2
+torchaudio==0.7.2
