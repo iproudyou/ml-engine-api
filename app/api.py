@@ -1,15 +1,19 @@
 import json
 
-from flask import request
+from flask import request, jsonify
 
-from . import create_app
-from .models import Cats, db
+from app import create_app, database
+from app.models import Cats
 
 app = create_app()
 
 @app.route('/', methods=['GET'])
+def hello_world():
+    return jsonify({'message': 'Welcome K-POP LOCO'})
+
+@app.route('/all', methods=['GET'])
 def fetch():
-    cats = db.get_all(Cats)
+    cats = database.get_all(Cats)
     all_cats = []
     for cat in cats:
         new_cat = {
@@ -30,17 +34,22 @@ def add():
     price = data['price']
     breed = data['breed']
 
-    db.add_instance(Cats, name=name, price=price, breed=breed)
+    database.add_instance(Cats, name=name, price=price, breed=breed)
     return json.dumps("Added"), 200
 
 @app.route('/remove/<cat_id>', methods=['DELETE'])
 def remove(cat_id):
-    db.delete_instance(Cats, id=cat_id)
+    database.delete_instance(Cats, id=cat_id)
     return json.dumps("Deleted"), 200
 
 @app.route('/edit/<cat_id>', methods=['PATCH'])
 def edit(cat_id):
     data = request.get_json()
     new_price = data['price']
-    db.edit_instance(Cats, id=cat_id, price=new_price)
+    database.edit_instance(Cats, id=cat_id, price=new_price)
     return json.dumps("Edited"), 200
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
