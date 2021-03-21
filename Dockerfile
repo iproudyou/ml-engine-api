@@ -12,12 +12,9 @@ RUN conda env create -f /environment.yml
 RUN echo "conda activate ml-api-env" >> ~/.bashrc
 ENV PATH /opt/conda/envs/ml-api-env/bin:$PATH
 
-# Activate the environment, and make sure it's activated
-RUN echo "Make sure flask is installed:"
-RUN python -c "import pandas"
-
 # The code to run when container is started
 COPY . /app
 WORKDIR /app
 
-ENTRYPOINT [ "./gunicorn.sh" ]
+RUN chmod +x ./gunicorn.sh
+ENTRYPOINT [ "sh", "./gunicorn.sh" ]
