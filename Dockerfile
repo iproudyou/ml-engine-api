@@ -17,4 +17,5 @@ COPY . /app
 WORKDIR /app
 
 RUN chmod +x ./gunicorn.sh
+
 ENTRYPOINT [ "sh", "./gunicorn.sh" ]
