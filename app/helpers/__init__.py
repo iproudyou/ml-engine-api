@@ -1,6 +1,6 @@
-from flask import jsonify, make_response
 import jwt
-import datatime import datetime, timedelta
+from flask import jsonify, make_response
+from datatime import datetime, timedelta
 
 from app.config import BaseConfig
 
