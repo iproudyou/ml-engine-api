@@ -22,7 +22,7 @@ def set_file_handler():
 def log():
     logging.Formatter.converter = time.gmtime
     logger = logging.getLogger('ml-engine-api')
-    logger,setLevel(logging.DEBUG)
+    logger.setLevel(logging.DEBUG)
     logger.addHandler(set_console_handler())
     logger.addHandler(set_file_handler())
     logger.propagate = False
