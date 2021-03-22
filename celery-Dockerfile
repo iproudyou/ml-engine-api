@@ -1,0 +1,13 @@
+FROM python:3.8
+
+COPY ./kpop /usr/src/kpop
+
+COPY ./requirements-celery.txt /usr/src/
+
+RUN pip3 install --upgrade pip
+
+RUN pip3 install -r /usr/src/requirements-celery.txt
+
+WORKDIR /usr/src
+
+CMD celery -A kpop.celery.tasks worker --loglevel=INFO --concurrency=10
