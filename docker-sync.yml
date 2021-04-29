@@ -1,0 +1,9 @@
+version: "2"
+options:
+  monit_enable: true
+  compose-file-path: 'docker-compose.yml'
+
+syncs:
+  kpop-sync:
+    notify_terminal: true
+    src: './kpop'

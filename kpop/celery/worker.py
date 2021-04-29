@@ -1,10 +1,10 @@
 from celery import Celery
 
-from kpop.config import BACKEND_CONN_URI, BROKER_CONN_URI
+from kpop.config import settings
 
 celery = Celery(
         "worker",
-        broker=BROKER_CONN_URI,
-        backend=BACKEND_CONN_URI,
+        broker=settings.BROKER_CONN_URI,
+        backend=settings.BACKEND_CONN_URI,
         include=["kpop.celery.tasks"]
 )

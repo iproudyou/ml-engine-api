@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Security
 
-from kpop.dependencies import authenticated
+from kpop.deps import authenticated
 
 router = APIRouter(
     prefix="/admin",

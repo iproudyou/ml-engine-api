@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, Security
 from sqlalchemy.orm import Session
 
 from kpop.database import engine, SessionLocal
-from kpop.dependencies import authenticated
+from kpop.deps import authenticated
 from kpop.models import items as model
 from kpop.schemas import items as schema
 from kpop.cruds import items as crud

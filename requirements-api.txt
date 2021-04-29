@@ -1,6 +1,8 @@
 amqp>=2.6.0
 alembic>=1.4.2
 billiard>=3.6.3.0
+boto3>=1.17.68
+botocore>=1.20.68
 celery>=4.4.6
 click>=7.1.2
 fastapi>=0.63.0
@@ -8,6 +10,8 @@ future>=0.18.2
 gunicorn>=20.0.4
 h11>=0.9.0
 httptools>=0.1.1
+instaloader>=4.7.1
+insta-scrape>=2.1.2
 kombu>=4.6.11
 psycopg2-binary>=2.8.5
 pydantic>=1.5.1

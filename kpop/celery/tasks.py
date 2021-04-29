@@ -1,9 +1,9 @@
 import redis
 
 from kpop.celery.worker import celery
-from kpop.config import REDIS_STORE_CONN_URI
+from kpop.config import settings
 
-redis_store = redis.Redis.from_url(REDIS_STORE_CONN_URI)
+redis_store = redis.Redis.from_url(settings.REDIS_STORE_CONN_URI)
 
 
 @celery.task

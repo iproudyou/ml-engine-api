@@ -1,4 +1,4 @@
-tags_openapi_docs = [
+TAGS_OPENAPI_DOCS = [
     {
         "name": "admin",
         "description": "Admin getting schwifty"
@@ -16,3 +16,7 @@ tags_openapi_docs = [
         "description": "Title List",  
     },
 ]
+
+STAGING = ["confirmed", "shipped", "in transit", "arrived", "delivered"]
+
+STAGING_TIME = 15

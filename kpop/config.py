@@ -1,30 +1,44 @@
-import os
+from pydantic import BaseSettings
 
-# Database config
-DATABASE_CONNECTION_URI = os.environ['DATABASE_CONNECTION_URI']
+class Settings(BaseSettings):
+    # Database config
+    DATABASE_CONNECTION_URI: str
 
-# App config
-API_SERVER_URI = os.environ['API_SERVER_URI']
-API_SECRET_KEY = os.environ['API_SECRET_KEY']
-API_SECRET_KEY_NAME =  os.environ['API_SECRET_KEY_NAME']
-stages = ["confirmed", "shipped", "in transit", "arrived", "delivered"]
-STAGING_TIME = 15 # seconds
+    # App config
+    API_SERVER_URI: str
+    API_SECRET_KEY: str
+    API_SECRET_KEY_NAME: str
 
-# Rabbitmq config
-RABBITMQ_HOST = os.environ.get('RABBITMQ_HOST')
-RABBITMQ_USERNAME = os.environ.get('RABBITMQ_USERNAME')
-RABBITMQ_PASSWORD = os.environ.get('RABBITMQ_PASSWORD')
-RABBITMQ_PORT = os.environ.get('RABBITMQ_PORT')
+    # Scraper config
+    INSTA_USER_NAME: str
+    INSTA_SESSION_ID: str
 
-# Redis config
-REDIS_HOST = os.environ.get('REDIS_HOST')
-REDIS_PORT = os.environ.get('REDIS_PORT')
-REDIS_CELERY_DB_INDEX = os.environ.get('REDIS_CELERY_DB_INDEX')
-REDIS_STORE_DB_INDEX = os.environ.get('REDIS_STORE_DB_INDEX')
+    # AWS config
+    AWS_ACCESS_KEY_ID: str
+    AWS_SECRET_ACCESS_KEY: str
+    AWS_S3_REGION_NAME: str
 
-# Celery config
-BROKER_CONN_URI = f"amqp://{RABBITMQ_USERNAME}:{RABBITMQ_PASSWORD}@{RABBITMQ_HOST}:{RABBITMQ_PORT}"
-BACKEND_CONN_URI = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CELERY_DB_INDEX}"
-REDIS_STORE_CONN_URI = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_STORE_DB_INDEX}"
+    # Rabbitmq config
+    RABBITMQ_HOST: str
+    RABBITMQ_USERNAME: str
+    RABBITMQ_PASSWORD: str
+    RABBITMQ_PORT: int
+
+    # Redis config
+    REDIS_HOST: str
+    REDIS_PORT: int
+    REDIS_CELERY_DB_INDEX: int
+    REDIS_STORE_DB_INDEX: int
+
+    # Celery config
+    BROKER_CONN_URI: str
+    BACKEND_CONN_URI: str
+    REDIS_STORE_CONN_URI: str
+    
+    class Config:
+        env_file = '.env'
+        env_file_encoding = 'utf-8'
+
+settings = Settings(_env_file='.env', _env_file_encoding='utf-8')
 
     
