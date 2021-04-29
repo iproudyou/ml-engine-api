@@ -1,0 +1,62 @@
+version: "3"
+services:
+    kdb:
+      image: postgres:latest
+      restart: always
+      ports:
+        - 5432:5432
+      env_file: 
+        - ./.env
+      volumes:
+        - ./postgres-data:/var/lib/postgresql/data
+    krabbitmq:
+        hostname: krabbitmq
+        image: rabbitmq:latest
+        environment:
+          - RABBITMQ_DEFAULT_USER=guest
+          - RABBITMQ_DEFAULT_PASS=guest
+        env_file: 
+          - ./.env
+        ports:
+            - "5672:5672"
+    kworker:
+        build:
+          context: .
+          dockerfile: ./celery-Dockerfile
+        env_file: 
+          - ./.env
+        depends_on:
+            - krabbitmq
+            - kredis
+            - kdb
+    kredis:
+        hostname: kredis
+        image: redis:latest
+        ports:
+            - "6379:6379"
+        env_file: 
+          - ./.env
+    kapi:
+        build:
+          context: .
+          dockerfile: ./api-Dockerfile
+        env_file: 
+          - ./.env
+        volumes:
+            - ./kpop:/usr/src/kpop/
+        depends_on:
+            - kworker
+            - kdb
+        ports:
+            - "8000:8000"
+    kflower:
+        build:
+          context: .
+          dockerfile: ./flower-Dockerfile
+        env_file: 
+          - ./.env
+        ports:
+            - 5555:5555
+        depends_on:
+            - krabbitmq
+            - kredis

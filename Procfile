@@ -1,1 +1,1 @@
-web: gunicorn --chdir app api:app --preload
+web: docker-compose -f docker-compose.yml up --scale worker=2 --build
